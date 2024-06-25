@@ -10,11 +10,11 @@ abstract class HomeState extends Equatable {
 class HomeInitial extends HomeState {}
 
 class HomeLoaded extends HomeState {
-  final List<UsuariosEntity> users;
+  final List<UserEntity> users;
   const HomeLoaded({required this.users});
 
   HomeLoaded copyWith({
-    List<UsuariosEntity>? user,
+    List<UserEntity>? user,
   }) {
     return HomeLoaded(
       users: users ?? this.users,
