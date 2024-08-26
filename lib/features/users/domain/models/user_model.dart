@@ -1,20 +1,47 @@
-class Geo {
-  final String lat;
-  final String lng;
+class UserModel {
+  final int id;
+  final String name;
+  final String username;
+  final String email;
+  final Address address;
+  final String phone;
+  final String website;
+  final Company company;
 
-  Geo({required this.lat, required this.lng});
+  UserModel({
+    required this.id,
+    required this.name,
+    required this.username,
+    required this.email,
+    required this.address,
+    required this.phone,
+    required this.website,
+    required this.company,
+  });
 
-  factory Geo.fromJson(Map<String, dynamic> json) {
-    return Geo(
-      lat: json['lat'],
-      lng: json['lng'],
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      name: json['name'],
+      username: json['username'],
+      email: json['email'],
+      address: Address.fromJson(json['address']),
+      phone: json['phone'],
+      website: json['website'],
+      company: Company.fromJson(json['company']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'lat': lat,
-      'lng': lng,
+      'id': id,
+      'name': name,
+      'username': username,
+      'email': email,
+      'address': address.toJson(),
+      'phone': phone,
+      'website': website,
+      'company': company.toJson(),
     };
   }
 }
@@ -83,50 +110,23 @@ class Company {
   }
 }
 
-class UserModel {
-  final int id;
-  final String name;
-  final String username;
-  final String email;
-  final Address address;
-  final String phone;
-  final String website;
-  final Company company;
+class Geo {
+  final String lat;
+  final String lng;
 
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.username,
-    required this.email,
-    required this.address,
-    required this.phone,
-    required this.website,
-    required this.company,
-  });
+  Geo({required this.lat, required this.lng});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json['id'],
-      name: json['name'],
-      username: json['username'],
-      email: json['email'],
-      address: Address.fromJson(json['address']),
-      phone: json['phone'],
-      website: json['website'],
-      company: Company.fromJson(json['company']),
+  factory Geo.fromJson(Map<String, dynamic> json) {
+    return Geo(
+      lat: json['lat'],
+      lng: json['lng'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'name': name,
-      'username': username,
-      'email': email,
-      'address': address.toJson(),
-      'phone': phone,
-      'website': website,
-      'company': company.toJson(),
+      'lat': lat,
+      'lng': lng,
     };
   }
 }

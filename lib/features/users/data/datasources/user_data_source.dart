@@ -1,21 +1,19 @@
 import 'dart:convert';
 
-import 'package:customer/core/models/user.dart';
+import 'package:customer/features/users/domain/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../core/models/usuarios_entity.dart';
-
-abstract class HomeDataSource {
-  Future<UserModel> traerUnUsuario({
+abstract class UserDataSource {
+  Future<UserModel> getUser({
     required String id,
   });
 
-  Future<List<UsuariosEntity>> usuarios();
+  Future<List<UserModel>> getUsers();
 }
 
-class HomedatasourceImpl implements HomeDataSource {
+class UserDataSourceImpl implements UserDataSource {
   @override
-  Future<UserModel> traerUnUsuario({required String id}) async {
+  Future<UserModel> getUser({required String id}) async {
     final response = await http
         .get(Uri.parse('https://jsonplaceholder.typicode.com/users/$id'));
 
@@ -30,7 +28,7 @@ class HomedatasourceImpl implements HomeDataSource {
   }
 
   @override
-  Future<List<UsuariosEntity>> usuarios() async {
+  Future<List<UserModel>> getUsers() async {
     final response =
         await http.get(Uri.parse('https://jsonplaceholder.typicode.com/users'));
 
@@ -38,13 +36,13 @@ class HomedatasourceImpl implements HomeDataSource {
         response.body != "" ? json.decode(utf8.decode(response.bodyBytes)) : [];
 
     if (response.statusCode >= 200 && response.statusCode <= 204) {
-      List<UsuariosEntity> listado = [];
+      List<UserModel> usersList = [];
 
       dataDecode.forEach((element) {
-        listado.add(UsuariosEntity.fromJson(element));
+        usersList.add(UserModel.fromJson(element));
       });
 
-      return listado;
+      return usersList;
     } else {
       throw Exception('Error al traer los datos');
     }

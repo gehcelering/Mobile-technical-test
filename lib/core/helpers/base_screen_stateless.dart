@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class BaseScreen<S, T extends BlocBase<S>> extends StatelessWidget {
-  const BaseScreen({Key? key}) : super(key: key);
+  const BaseScreen({super.key});
 
   T createBloc();
 
